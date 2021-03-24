@@ -6,7 +6,6 @@
 
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const compression = require('compression');
 const methodOverride = require('method-override');
 const helmet = require('helmet');
@@ -29,8 +28,8 @@ const app = express();
 app.use(morgan(vars.logs));
 
 // Parse request body params and attach them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 // Compress the response in gzip for better performance
 app.use(compression());
