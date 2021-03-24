@@ -1,3 +1,10 @@
+/**
+ * @file mongoose.js
+ * @description This file contains Mongo DB database connection code
+ * @author Arkadip Bhattacharya(@darkmatter18)
+ */
+
+
 const mongoose = require('mongoose');
 const logger = require('./logger');
 const vars = require('./vars');

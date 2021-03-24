@@ -1,3 +1,10 @@
+/**
+ * @file index.js
+ * @description The main script to run the node express server
+ * @author Arkadip Bhattacharya(@darkmatter18)
+ */
+
+
 const vars = require('./config/vars');
 const logger = require('./config/logger');
 const app = require('./config/express');

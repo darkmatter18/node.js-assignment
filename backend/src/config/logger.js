@@ -1,3 +1,11 @@
+/**
+ * @file logger.js
+ * @description This file contains code base for logging.
+ * @uses winston for logging information 
+ * @author Arkadip Bhattacharya(@darkmatter18)
+ */
+
+
 const winston = require('winston');
 
 const logger = winston.createLogger({

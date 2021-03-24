@@ -1,6 +1,15 @@
+/**
+ * @file vars.js
+ * @description This file contains all environment variables and exports that as an object
+ * @author Arkadip Bhattacharya(@darkmatter18)
+ */
+
+
 const path = require('path');
 
-// import .env variables
+/**
+ * Getting the .env file and adding the envs to process.env
+ */
 require('dotenv-safe').config({
   path: path.join(__dirname, '../../../.env'),
   sample: path.join(__dirname, './../../../.env.example'),
