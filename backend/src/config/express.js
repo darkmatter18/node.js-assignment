@@ -11,6 +11,8 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 const helmet = require('helmet');
 const cors = require('cors');
+const passport = require('passport')
+const passportStategies = require('./passport')
 
 const vars = require('./vars');
 
@@ -40,6 +42,10 @@ app.use(helmet());
 // Using Cross Origin Resource Sharing for APIs
 app.use(cors());
 
+//Passport.js
+app.use(passport.initialize());
+passport.use('jwt', passportStategies.jwt);
+passport.use('local', passportStategies.localStrategy);
 
 
 module.exports = app;
