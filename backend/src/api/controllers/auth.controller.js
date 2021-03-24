@@ -40,3 +40,19 @@ exports.register = async (req, res, next) => {
         return next(User.checkDuplicateEmail(error));
     }
 };
+
+/**
+ * @api {POST} /api/auth/login
+ * Returns jwt token if valid username and password is provided
+ * @public
+ */
+ exports.login = async (req, res, next) => {
+    try {
+      const { user, accessToken } = await User.findAndGenerateToken(req.body);
+      const token = generateTokenResponse(user, accessToken);
+      const userTransformed = user.transform();
+      return res.json({ token, user: userTransformed });
+    } catch (error) {
+      return next(error);
+    }
+  };

@@ -54,7 +54,9 @@ userSchema.pre('save', async function save(next) {
     }
 })
 
-userSchema.methods.passwordMatches = async (password) => await argon2.verify(this.password, password);
+userSchema.methods.passwordMatches = async function (password) {
+    return await argon2.verify(this.password, password)
+};
 
 userSchema.methods.token = () => {
     const payload = {
@@ -65,10 +67,10 @@ userSchema.methods.token = () => {
     return jwt.encode(payload, vars.jwtSecret);
 }
 
-userSchema.methods.transform = function() {
+userSchema.methods.transform = function () {
     const transformed = {};
     const fields = ['_id', 'name', 'email', 'role', 'createdAt'];
-    
+
     fields.forEach((field) => {
         transformed[field] = this[field];
     });

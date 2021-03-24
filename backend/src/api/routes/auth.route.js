@@ -32,7 +32,7 @@ const router = express.Router();
  * @apiError On API Error, Response:
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/register').post(validate(register), controllers.register)
+router.route('/register').post(validate(register), controllers.register);
 
 
 /**
@@ -61,7 +61,7 @@ router.route('/register').post(validate(register), controllers.register)
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  * @apiError (Unauthorized 401)  Unauthorized     Incorrect email or password
  */
-router.route('/login').post(validate(login))
+router.route('/login').post(validate(login), controllers.login);
 
 /**
  * @api {post} v1/auth/refresh-token
