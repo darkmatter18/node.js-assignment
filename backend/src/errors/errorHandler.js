@@ -4,6 +4,7 @@
  * @description Error handler. Send stacktrace only during development
  * @author Arkadip Bhattacharya(@darkmatter18)
  */
+const vars = require('./../config/vars')
 
 const errorHandler = (err, req, res, next) => {
     const response = {
@@ -13,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
         stack: err.stack,
     };
 
-    if (env !== 'development') {
+    if (vars.env !== 'development') {
         delete response.stack;
     }
 
