@@ -1,4 +1,4 @@
-const { port, env } = require('./config/vars');
+const vars = require('./config/vars');
 const logger = require('./config/logger');
 const app = require('./config/express');
 const mongoose = require('./config/mongoose');
@@ -7,7 +7,7 @@ const mongoose = require('./config/mongoose');
 mongoose.connect();
 
 // listen to requests
-app.listen(port, () => logger.info(`server started on port ${port} (${env})`));
+app.listen(vars.port, () => logger.info(`server started on port ${vars.port} (${vars.env})`));
 
 /**
 * Exports express
