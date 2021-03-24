@@ -34,4 +34,14 @@ module.exports = {
             refreshToken: Joi.string().required(),
         })
     },
+
+    // POST /api/auth/send-password-reset
+    sendPasswordReset: {
+        body: {
+          email: Joi.string()
+            .email()
+            .required(),
+        },
+      },
+    
 }
