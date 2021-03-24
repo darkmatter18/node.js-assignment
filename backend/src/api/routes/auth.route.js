@@ -1,7 +1,7 @@
 const express = require('express');
 const { validate } = require('express-validation');
 
-const { register, login, refresh } = require('../validations/auth.validation');
+const { register, login, refresh, sendPasswordReset } = require('../validations/auth.validation');
 const controllers = require('../controllers/auth.controller')
 
 const router = express.Router();
@@ -83,7 +83,7 @@ router.route('/login').post(validate(login), controllers.login);
  */
 router.route('/refresh').post(validate(refresh), controllers.refresh);
 
-router.route('/send-password-reset').post();
+router.route('/send-password-reset').post(validate(sendPasswordReset));
 
 router.route('/reset-password').post();
 
