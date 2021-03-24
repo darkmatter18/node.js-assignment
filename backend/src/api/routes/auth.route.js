@@ -1,7 +1,7 @@
 const express = require('express');
 const { validate } = require('express-validation');
 
-const { register, login } = require('../validations/auth.validation');
+const { register, login, refresh } = require('../validations/auth.validation');
 const controllers = require('../controllers/auth.controller')
 
 const router = express.Router();
@@ -64,7 +64,7 @@ router.route('/register').post(validate(register), controllers.register);
 router.route('/login').post(validate(login), controllers.login);
 
 /**
- * @api {post} v1/auth/refresh-token
+ * @api {post} /api/auth/refresh-token
  * @apiDescription Refresh expired accessToken
  * @apiName RefreshToken
  * @apiGroup Auth
@@ -81,7 +81,7 @@ router.route('/login').post(validate(login), controllers.login);
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  * @apiError (Unauthorized 401)  Unauthorized     Incorrect email or refreshToken
  */
- router.route('/refresh-token').post();
+router.route('/refresh').post(validate(refresh), controllers.refresh);
 
 router.route('/send-password-reset').post();
 
