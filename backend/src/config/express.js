@@ -15,6 +15,7 @@ const passport = require('passport')
 const passportStategies = require('./passport')
 
 const vars = require('./vars');
+const router = require('../api/routes');
 
 
 /**
@@ -46,6 +47,9 @@ app.use(cors());
 app.use(passport.initialize());
 passport.use('jwt', passportStategies.jwt);
 passport.use('local', passportStategies.localStrategy);
+
+// Add the api router
+app.use('/api', router);
 
 
 module.exports = app;
