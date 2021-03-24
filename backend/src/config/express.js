@@ -16,6 +16,8 @@ const passportStategies = require('./passport')
 
 const vars = require('./vars');
 const router = require('../api/routes');
+const errors = require('./../errors')
+const errorHandler = require('./../errors/errorHandler')
 
 
 /**
@@ -51,5 +53,9 @@ passport.use('local', passportStategies.localStrategy);
 // Add the api router
 app.use('/api', router);
 
+
+app.use(errors.converter);
+app.use(errors.notFound);
+app.use(errorHandler);
 
 module.exports = app;
