@@ -38,10 +38,22 @@ module.exports = {
     // POST /api/auth/send-password-reset
     sendPasswordReset: {
         body: {
-          email: Joi.string()
-            .email()
-            .required(),
+            email: Joi.string()
+                .email()
+                .required(),
         },
-      },
-    
+    },
+    passwordReset: {
+        body: Joi.object({
+            email: Joi.string()
+                .email()
+                .required(),
+            password: Joi.string()
+                .required()
+                .min(6)
+                .max(128),
+            resetToken: Joi.string().required(),
+        }),
+    },
+
 }
