@@ -13,6 +13,7 @@
 11. passport-local - Used to add the  **passport local stategy**
 12. winston - Used as the **log provider**
 13. http-status - Used to response **http status easily**
+14. express-validation - Used to **validate http request data**
 
 ## Dev library:
 1. nodemon - Used to track the changes and refresh the dev

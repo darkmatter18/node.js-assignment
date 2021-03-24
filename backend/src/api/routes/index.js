@@ -6,10 +6,17 @@
 
 const express = require('express');
 
+const authRouter = require('./auth.route')
+
 
 const router = express.Router();
 
 router.get('/status', (req, res)=> res.send("OK! I'm live"));
 
+/**
+ * Adding router
+ * @prefix /api
+ */
+router.use('/auth', authRouter);
 
 module.exports = router;
