@@ -14,6 +14,7 @@
 12. winston - Used as the **log provider**
 13. http-status - Used to response **http status easily**
 14. express-validation - Used to **validate http request data**
+15. joi - Used to **Validate data**
 
 ## Dev library:
 1. nodemon - Used to track the changes and refresh the dev
