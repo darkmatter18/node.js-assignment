@@ -1,4 +1,8 @@
 const express = require('express');
+const validate = require('express-validation');
+
+const { register, login } = require('../validations/auth.validation');
+
 
 const router = express.Router();
 
@@ -28,7 +32,7 @@ const router = express.Router();
  * @apiError On API Error, Response:
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/register').post()
+router.route('/register').post(validate(register), (req, res)=> res.send("DONE"))
 
 
 /**
@@ -57,6 +61,6 @@ router.route('/register').post()
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  * @apiError (Unauthorized 401)  Unauthorized     Incorrect email or password
  */
-router.route('/login').post()
+router.route('/login').post(validate(login))
 
 module.exports = router
