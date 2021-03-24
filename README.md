@@ -15,6 +15,11 @@
 13. http-status - Used to response **http status easily**
 14. express-validation - Used to **validate http request data**
 15. joi - Used to **Validate data**
+16. argon2 - Used to **hash passwords**
+17. moment - Used to **manipulate dates**
+18. jwt-simple - Used for **JWT**
+19. lodash - Used to **manipulate array and objects**
+20. crypto - Used to **genarate crypto keys**
 
 ## Dev library:
 1. nodemon - Used to track the changes and refresh the dev
