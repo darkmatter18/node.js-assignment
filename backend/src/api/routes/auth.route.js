@@ -2,7 +2,7 @@ const express = require('express');
 const { validate } = require('express-validation');
 
 const { register, login } = require('../validations/auth.validation');
-
+const controllers = require('../controllers/auth.controller')
 
 const router = express.Router();
 
@@ -32,7 +32,7 @@ const router = express.Router();
  * @apiError On API Error, Response:
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/register').post(validate(register), (req, res) => res.send("DONE"))
+router.route('/register').post(validate(register), controllers.register)
 
 
 /**
