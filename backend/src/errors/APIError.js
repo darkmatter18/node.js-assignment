@@ -1,6 +1,13 @@
+/**
+ * @file APIError.js
+ * @description APIError class implementation
+ * @author Arkadip Bhattacharya(@darkmatter18)
+ */
+
 const httpStatus = require('http-status');
 
 /**
+ * @class ExtendableError
  * @extends Error
  */
 class ExtendableError extends Error {
@@ -21,6 +28,7 @@ class ExtendableError extends Error {
 
 /**
  * Class representing an API error.
+ * @class APIError
  * @extends ExtendableError
  */
 class APIError extends ExtendableError {
