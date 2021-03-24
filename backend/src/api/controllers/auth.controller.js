@@ -46,13 +46,33 @@ exports.register = async (req, res, next) => {
  * Returns jwt token if valid username and password is provided
  * @public
  */
- exports.login = async (req, res, next) => {
+exports.login = async (req, res, next) => {
     try {
-      const { user, accessToken } = await User.findAndGenerateToken(req.body);
-      const token = generateTokenResponse(user, accessToken);
-      const userTransformed = user.transform();
-      return res.json({ token, user: userTransformed });
+        const { user, accessToken } = await User.findAndGenerateToken(req.body);
+        const token = generateTokenResponse(user, accessToken);
+        const userTransformed = user.transform();
+        return res.json({ token, user: userTransformed });
     } catch (error) {
-      return next(error);
+        return next(error);
     }
-  };
+};
+
+/**
+ * @api {POST} /api/auth/refresh
+ * Returns a new jwt when given a valid refresh token
+ * @public
+ */
+exports.refresh = async (req, res, next) => {
+    try {
+        const { email, refreshToken } = req.body;
+        const refreshObject = await RefreshToken.findOneAndRemove({
+            userEmail: email,
+            token: refreshToken,
+        });
+        const { user, accessToken } = await User.findAndGenerateToken({ email, refreshObject });
+        const response = generateTokenResponse(user, accessToken);
+        return res.json(response);
+    } catch (error) {
+        return next(error);
+    }
+};
