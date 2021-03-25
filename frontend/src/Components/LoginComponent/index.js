@@ -12,7 +12,7 @@ import { useSignIn } from "react-auth-kit";
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { Button } from '@material-ui/core';
-import { DASHBOARD, REGISTER } from '../RouteComponent/routes';
+import { DASHBOARD, FORGOTPASSWORD, REGISTER } from '../RouteComponent/routes';
 import api from './api'
 
 const useStyles = makeStyles((theme) => ({
@@ -133,7 +133,7 @@ const AllLogin = () => {
                             </Button>
                             <Grid container spacing={4} justify="flex-end">
                                 <Grid item>
-                                    <Link onClick={() => history.push(REGISTER)} variant="body2">
+                                    <Link onClick={() => history.push(FORGOTPASSWORD)} variant="body2">
                                         Forgot Password
                                     </Link>
                                 </Grid>
