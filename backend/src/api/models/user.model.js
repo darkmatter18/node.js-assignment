@@ -58,7 +58,7 @@ userSchema.methods.passwordMatches = async function (password) {
     return await argon2.verify(this.password, password)
 };
 
-userSchema.methods.token = () => {
+userSchema.methods.token = function() {
     const payload = {
         exp: moment().add(vars.jwtExpirationInterval, 'minutes').unix(),
         iat: moment().unix(),
