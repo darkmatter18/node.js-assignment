@@ -20,6 +20,7 @@
 18. jwt-simple - Used for **JWT**
 19. lodash - Used to **manipulate array and objects**
 20. crypto - Used to **genarate crypto keys**
+21. bluebild - Used to **make *Promise* more powerful**
 
 ## Dev library:
 1. nodemon - Used to track the changes and refresh the dev
