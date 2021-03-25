@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const moment = require('moment-timezone');
+const moment = require('moment');
 
 /**
  * Refresh Token Schema
