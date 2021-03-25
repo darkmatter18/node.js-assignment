@@ -4,7 +4,7 @@
  * @author Arkadip Bhattacharya(@darkmatter18)
  */
 
-
+Promise = require("bluebird");
 const vars = require('./config/vars');
 const logger = require('./config/logger');
 const app = require('./config/express');
