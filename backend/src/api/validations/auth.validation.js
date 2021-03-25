@@ -4,6 +4,8 @@ module.exports = {
     // POST /api/auth/register
     register: {
         body: Joi.object({
+            name: Joi.string()
+                .required(),
             email: Joi.string()
                 .email()
                 .required(),
