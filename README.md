@@ -1,3 +1,34 @@
+## API endpoints:
+
+`/api` - API endpoint for server
+   
+   - `/auth` - Auth Endpoints
+   
+     - `/register` - [POST] Registration endpoint (`/api/auth/register`)
+     - `/login` - [POST] Login Endpoint (`/api/auth/login`)
+     - `/refresh` - [POST] Refresh Token endpoint (`/api/auth/refresh`)
+     - `/send-password-reset` - [POST] Password request send to email endpoint (`/api/auth/send-password-reset`)
+     - `/reset-password` - [POST] Password reset endpoint (`/api/auth/reset-password`)
+
+   - `/user` User level endpoints
+     
+     - `/blog` - All blog level routing (`/api/user/blog`)
+        
+        - GET = See all blogs that belongs to the user
+        - POST = Add new blog
+        - DELETE = Remove a blog 
+
+   - `/admin` Admin level endpoints
+     
+     - `/blog` - All blog level routing (`/api/admin/blog`)
+        
+        - GET = See all blogs
+        - POST = Add new blog
+        - DELETE = Remove a blog 
+
+
+
+
 ## Used Libraries:
 
 1. Express - Express Node App
