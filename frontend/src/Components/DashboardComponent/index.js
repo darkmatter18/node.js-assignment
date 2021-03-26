@@ -15,6 +15,7 @@ import { useAuthUser, useSignOut } from 'react-auth-kit';
 import axios from 'axios'
 import moment from 'moment'
 import { Modal } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -53,6 +54,7 @@ export default function DashboardComponent() {
     const classes = useStyles();
     const authState = useAuthUser();
     const signOut = useSignOut();
+    const history = useHistory();
     const [data, setData] = React.useState(null);
     const [openState, setOpenState] = React.useState({ open: false, index: 0 });
 
@@ -86,8 +88,8 @@ export default function DashboardComponent() {
                         <Typography variant="h6" color="inherit" noWrap className={classes.cardContent}>
                             Hello, {authState().name}
                         </Typography>
-                        <Button color="inherit" >New Blog</Button>
-                        <Button color="inherit" >My Blogs</Button>
+                        <Button color="inherit" onClick={()=> {history.push("#")}}>New Blog</Button>
+                        <Button color="inherit" onClick={()=> {history.push("#")}}>My Blogs</Button>
                         <Button color="inherit" onClick={() => { signOut() }}>Logout</Button>
                     </Toolbar>
                 </AppBar>
