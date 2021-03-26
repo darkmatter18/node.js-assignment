@@ -31,7 +31,7 @@ blogsSchema.statics = {
                 return blogs;
             }
             throw new APIError({
-                message: 'User does not exist',
+                message: 'Find blogs failed',
                 status: httpStatus.NOT_FOUND,
             });
         } catch (error) {
@@ -50,10 +50,28 @@ blogsSchema.statics = {
                 return blogs;
             }
             throw new APIError({
-                message: 'User does not exist',
+                message: 'Find blogs failed',
                 status: httpStatus.NOT_FOUND,
             });
         } catch (error) {
+            throw error;
+        }
+    },
+
+    async updateBLog(id, update) {
+        try {
+            if (mongoose.Types.ObjectId.isValid(id)) {
+                const doc = await this.findByIdAndUpdate(id, update).save()
+                if (doc) {
+                    return doc
+                }
+            }
+            throw new APIError({
+                message: 'Update Blog failed',
+                status: httpStatus.NOT_FOUND,
+            });
+        }
+        catch (error) {
             throw error;
         }
     },

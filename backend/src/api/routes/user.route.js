@@ -1,6 +1,6 @@
 const express = require('express');
 const { validate } = require('express-validation');
-const { postBlog } = require('../validations/user.validation');
+const { postBlog, deleteBlog } = require('../validations/user.validation');
 const { authorize, ADMIN, LOGGED_USER } = require('./../auth')
 
 const userController = require('./../controllers/user.controller')
@@ -17,6 +17,6 @@ router.route('/blog')
 
     .get(authorize(), userController.getBlogs)
 
-    .delete(authorize(), userController.deleteBlog)
+    .delete(authorize(), validate(deleteBlog), userController.deleteBlog)
 
 module.exports = router;
