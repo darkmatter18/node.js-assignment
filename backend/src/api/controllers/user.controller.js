@@ -4,7 +4,13 @@ const Blog = require('./../models/blogs.model');
 
 
 exports.getBlogs = async (req, res, next) => {
-    res.send("Hello")
+    try {
+        const data = await Blog.getBlogs(req.user._id)
+        res.status(httpStatus.OK)
+        res.send(data)
+    } catch (e) {
+        next(e)
+    }
 }
 
 exports.getsingleBlog = async (req, res, next) => {
@@ -14,13 +20,13 @@ exports.getsingleBlog = async (req, res, next) => {
 
 exports.postBlog = async (req, res, next) => {
     const userId = req.user._id
-    if(req.body.userEmail === req.user.email){
-        const whole_data = {...req.body, userId: userId}
+    if (req.body.userEmail === req.user.email) {
+        const whole_data = { ...req.body, userId: userId }
         try {
             new Blog(whole_data).save()
             res.status(httpStatus.CREATED);
             return res.json({ message: "Blog Created" });
-        } catch (e){
+        } catch (e) {
             next(e)
         }
     } else {
