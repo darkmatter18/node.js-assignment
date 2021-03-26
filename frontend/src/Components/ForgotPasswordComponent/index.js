@@ -45,7 +45,11 @@ export default function ForgotPasswordComponent() {
         console.log(data);
         const { success, err } = await api(data)
         if (err && !success) {
-            alert(err);
+            if (err.response.data.message){
+                alert(err.response.data.message)
+            }  else {
+                alert(err);
+            }
         } else {
             console.log(success)
         }
