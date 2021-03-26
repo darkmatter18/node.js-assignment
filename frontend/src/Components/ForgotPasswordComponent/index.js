@@ -1,6 +1,5 @@
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -9,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router';
 import { useForm } from "react-hook-form";
-import { DASHBOARD, LOGIN } from '../RouteComponent/routes';
+import { DASHBOARD } from '../RouteComponent/routes';
 import api from './api'
 import { useSignIn } from 'react-auth-kit';
 
@@ -48,15 +47,7 @@ export default function ForgotPasswordComponent() {
         if (err && !success) {
             alert(err);
         } else {
-            signIn({
-                token: success.token.accessToken,
-                expiresIn: 15,
-                tokenType: success.token.tokenType,
-                refreshToken: success.token.refreshToken,
-                refreshTokenExpireIn: 60,
-                authState: success.user
-            }) ? history.push(DASHBOARD)
-                : alert("Sign In Error occurs")
+            console.log(success)
         }
     }
 
