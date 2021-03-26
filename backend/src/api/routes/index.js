@@ -8,6 +8,7 @@ const express = require('express');
 
 const authRouter = require('./auth.route')
 const userRouter = require('./user.route')
+const adminRouter = require('./admin.route')
 
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.get('/status', (req, res)=> res.send("OK! I'm live"));
  */
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
+router.use('/admin', adminRouter);
 
 module.exports = router;

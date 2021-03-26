@@ -5,7 +5,7 @@ const Blog = require('./../models/blogs.model');
 
 exports.getBlogs = async (req, res, next) => {
     try {
-        const data = await Blog.getBlogs(req.user._id)
+        const data = await Blog.getUserBlogs(req.user._id)
         res.status(httpStatus.OK)
         res.send(data)
     } catch (e) {

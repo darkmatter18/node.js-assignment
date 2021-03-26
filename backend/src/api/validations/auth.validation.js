@@ -13,6 +13,7 @@ module.exports = {
                 .required()
                 .min(6)
                 .max(128),
+            role: Joi.string()
         }),
     },
 
