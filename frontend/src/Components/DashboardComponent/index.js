@@ -1,21 +1,17 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useAuthUser, useSignOut } from 'react-auth-kit';
 import axios from 'axios'
 import moment from 'moment'
 import { Modal } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import AppBarComponent from '../AppBarComponent';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -52,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DashboardComponent() {
     const classes = useStyles();
-    const authState = useAuthUser();
-    const signOut = useSignOut();
-    const history = useHistory();
     const [data, setData] = React.useState(null);
     const [openState, setOpenState] = React.useState({ open: false, index: 0 });
 
@@ -82,18 +75,7 @@ export default function DashboardComponent() {
 
     return (
         <React.Fragment>
-            <div className={classes.cardContent}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6" color="inherit" noWrap className={classes.cardContent}>
-                            Hello, {authState().name}
-                        </Typography>
-                        <Button color="inherit" onClick={()=> {history.push("#")}}>New Blog</Button>
-                        <Button color="inherit" onClick={()=> {history.push("#")}}>My Blogs</Button>
-                        <Button color="inherit" onClick={() => { signOut() }}>Logout</Button>
-                    </Toolbar>
-                </AppBar>
-            </div>
+            <AppBarComponent />
             <main>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {data ? (
