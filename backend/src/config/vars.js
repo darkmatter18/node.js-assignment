@@ -10,11 +10,13 @@ const path = require('path');
 /**
  * Getting the .env file and adding the envs to process.env
  */
-require('dotenv-safe').config({
-  path: path.join(__dirname, '../../../.env'),
-  sample: path.join(__dirname, './../../../.env.example'),
-});
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv-safe').config({
+    path: path.join(__dirname, '../../../.env'),
+    sample: path.join(__dirname, './../../../.env.example'),
+  });
 
+}
 
 module.exports = {
   emailConfig: {
