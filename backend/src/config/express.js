@@ -20,6 +20,7 @@ const vars = require('./vars');
 const router = require('../api/routes');
 const errors = require('./../errors')
 const errorHandler = require('./../errors/errorHandler')
+const client = require('../client')
 
 
 /**
@@ -66,11 +67,10 @@ app.use(passport.initialize());
 passport.use('jwt', passportStategies.jwt);
 
 // Add the api router
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(client.static);
+app.use(client.clientRouter);
 app.use('/api', router);
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../client/build/index.html'));
-});
+
 
 app.use(errors.converter);
 app.use(errors.notFound);
