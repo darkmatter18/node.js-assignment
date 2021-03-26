@@ -52,11 +52,11 @@ const BlogsComponent = () => {
 
     const handleDelete = (id) => () => {
         deleteapi(id, auth())
-            .then(({success, err}) => {
+            .then(({ success, err }) => {
                 if (err && !success) {
-                    if (err.response.data.message){
+                    if (err.response.data.message) {
                         alert(err.response.data.message)
-                    }  else {
+                    } else {
                         alert(err);
                     }
                 } else {
@@ -64,7 +64,7 @@ const BlogsComponent = () => {
                 }
             })
             .catch((err) => {
-                if (err.response.data.message) {
+                if (err.response) {
                     alert(err.response.data.message)
                 } else {
                     alert(err);
@@ -78,7 +78,7 @@ const BlogsComponent = () => {
                 setBlogs(success.success);
             })
             .catch((err) => {
-                if (err.response.data.message) {
+                if (err.response) {
                     alert(err.response.data.message)
                 } else {
                     alert(err);
@@ -92,48 +92,56 @@ const BlogsComponent = () => {
             <Container component={"main"} className={classes.cardGrid} maxWidth="md">
                 {blogs ? (
                     <React.Fragment>
-                        {blogs.map((blog, index) => (
-                            <Card className={classes.card} key={index}>
-                                <CardContent>
-                                    <Typography variant="h6">
-                                        {blog.title}
-                                    </Typography>
-                                    <Typography variant="body1">
-                                        Published At: {moment(new Date(blog.createdAt)).format("D.MM.YYYY, h:mm a").toString()}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <div style={{ flexGrow: 1 }}>
-                                        <Button size="small" color="primary" onClick={handleOpen(index)}>
-                                            View
+                        {blogs.length > 0 ? (
+                            <React.Fragment>
+                                {blogs.map((blog, index) => (
+                                    <Card className={classes.card} key={index}>
+                                        <CardContent>
+                                            <Typography variant="h6">
+                                                {blog.title}
+                                            </Typography>
+                                            <Typography variant="body1">
+                                                Published At: {moment(new Date(blog.createdAt)).format("D.MM.YYYY, h:mm a").toString()}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <div style={{ flexGrow: 1 }}>
+                                                <Button size="small" color="primary" onClick={handleOpen(index)}>
+                                                    View
                                         </Button>
-                                    </div>
+                                            </div>
 
-                                    <IconButton aria-label="delete" onClick={handleDelete(blog._id)}>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </CardActions>
-                            </Card>
-                        ))}
-                        <Modal
-                            open={openState.open}
-                            onClose={handleClose}
-                        >
-                            <Card style={{ maxWidth: 800 }}>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {blogs[openState.index].title}
-                                    </Typography>
-                                    <Typography variant="h6">
-                                        {moment(new Date(blogs[openState.index].createdAt)).format("D.MM.YYYY, h:mm a").toString()}
-                                    </Typography>
-                                    <hr />
-                                    <Typography variant="body2">
-                                        {blogs[openState.index].body}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Modal>
+                                            <IconButton aria-label="delete" onClick={handleDelete(blog._id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </CardActions>
+                                    </Card>
+                                ))}
+                                <Modal
+                                    open={openState.open}
+                                    onClose={handleClose}
+                                >
+                                    <Card style={{ maxWidth: 800 }}>
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {blogs[openState.index].title}
+                                            </Typography>
+                                            <Typography variant="h6">
+                                                {moment(new Date(blogs[openState.index].createdAt)).format("D.MM.YYYY, h:mm a").toString()}
+                                            </Typography>
+                                            <hr />
+                                            <Typography variant="body2">
+                                                {blogs[openState.index].body}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Modal>
+                            </React.Fragment>
+                        ) : (
+                            <div>
+                                No Blog found. Try to write some.
+                            </div>
+                        )}
                     </React.Fragment>
                 ) : (
                     <div>

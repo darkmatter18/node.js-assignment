@@ -41,6 +41,24 @@ blogsSchema.statics = {
             throw error;
         }
     },
+
+    async deleteBlog(id) {
+        try {
+            let del;
+            if (mongoose.Types.ObjectId.isValid(id)) {
+                del = await this.findByIdAndRemove(id).exec();
+            }
+            if(del) {
+                return del
+            }
+            throw new APIError({
+                message: 'User does not exist',
+                status: httpStatus.NOT_FOUND,
+            });
+        } catch (error) {
+            throw error;
+        }
+    },
 }
 
 /**

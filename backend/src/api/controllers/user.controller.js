@@ -42,5 +42,12 @@ exports.editBlog = async (req, res, next) => {
 }
 
 exports.deleteBlog = async (req, res, next) => {
-    res.send("Hello")
+    try {
+        await Blog.deleteBlog(req.query.id)
+        const data = await Blog.getBlogs(req.user._id)
+        res.status(httpStatus.OK)
+        res.send(data)
+    } catch (err) {
+        next(err)
+    }
 }
