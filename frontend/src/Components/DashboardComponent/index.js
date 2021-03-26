@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useAuthUser } from 'react-auth-kit';
+import { useAuthUser, useSignOut } from 'react-auth-kit';
 import axios from 'axios'
 import moment from 'moment'
 import { Modal } from '@material-ui/core';
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DashboardComponent() {
     const classes = useStyles();
     const authState = useAuthUser();
+    const signOut = useSignOut();
     const [data, setData] = React.useState(null);
     const [openState, setOpenState] = React.useState({ open: false, index: 0 });
 
@@ -79,14 +80,18 @@ export default function DashboardComponent() {
 
     return (
         <React.Fragment>
-            <AppBar position="relative">
-                <Toolbar>
-                    <AccountCircle className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Hello, {authState().name}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+            <div className={classes.cardContent}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h6" color="inherit" noWrap className={classes.cardContent}>
+                            Hello, {authState().name}
+                        </Typography>
+                        <Button color="inherit" >New Blog</Button>
+                        <Button color="inherit" >My Blogs</Button>
+                        <Button color="inherit" onClick={() => { signOut() }}>Logout</Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
             <main>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {data ? (
@@ -123,7 +128,7 @@ export default function DashboardComponent() {
                                 open={openState.open}
                                 onClose={handleClose}
                             >
-                                <Card style={{maxWidth: 800}}>
+                                <Card style={{ maxWidth: 800 }}>
                                     <CardMedia
                                         className={classes.cardMedia}
                                         image={data[openState.index].urlToImage}
@@ -135,7 +140,7 @@ export default function DashboardComponent() {
                                         <Typography variant="body1">
                                             {data[openState.index].title}
                                         </Typography>
-                                        <hr/>
+                                        <hr />
                                         <Typography variant="body2">
                                             {data[openState.index].content}
                                         </Typography>
