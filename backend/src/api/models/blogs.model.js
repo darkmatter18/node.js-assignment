@@ -23,14 +23,30 @@ const blogsSchema = new mongoose.Schema({
 
 
 blogsSchema.statics = {
-    async getBlogs(id) {
+    async getBlogs(fealds) {
+        try {
+            const blogs = await this.find().select(fealds).exec();
+            if (blogs) {
+
+                return blogs;
+            }
+            throw new APIError({
+                message: 'User does not exist',
+                status: httpStatus.NOT_FOUND,
+            });
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    async getUserBlogs(id) {
         try {
             let blogs;
             if (mongoose.Types.ObjectId.isValid(id)) {
                 blogs = await this.find({ userId: id }).select(['title', 'body', 'userEmail', 'createdAt']).exec();
             }
             if (blogs) {
-                
+
                 return blogs;
             }
             throw new APIError({
@@ -48,7 +64,7 @@ blogsSchema.statics = {
             if (mongoose.Types.ObjectId.isValid(id)) {
                 del = await this.findByIdAndRemove(id).exec();
             }
-            if(del) {
+            if (del) {
                 return del
             }
             throw new APIError({
