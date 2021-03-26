@@ -17,10 +17,6 @@ router.route('/blog')
 
     .get(authorize(), userController.getBlogs)
 
-    .put(authorize(), userController.editBlog)
-
     .delete(authorize(), userController.deleteBlog)
-
-router.get('/blog/:blogId', authorize(), userController.getsingleBlog)
 
 module.exports = router;

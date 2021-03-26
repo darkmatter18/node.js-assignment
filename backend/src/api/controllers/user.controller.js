@@ -13,11 +13,6 @@ exports.getBlogs = async (req, res, next) => {
     }
 }
 
-exports.getsingleBlog = async (req, res, next) => {
-
-    res.send(req.params)
-}
-
 exports.postBlog = async (req, res, next) => {
     const userId = req.user._id
     if (req.body.userEmail === req.user.email) {
@@ -35,10 +30,6 @@ exports.postBlog = async (req, res, next) => {
             message: 'Validation error on email matching',
         });
     }
-}
-
-exports.editBlog = async (req, res, next) => {
-    res.send("Hello")
 }
 
 exports.deleteBlog = async (req, res, next) => {
