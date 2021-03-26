@@ -1,0 +1,40 @@
+const httpStatus = require("http-status")
+const APIError = require("../../errors/APIError")
+const Blog = require('./../models/blogs.model');
+
+
+exports.getBlogs = async (req, res, next) => {
+    res.send("Hello")
+}
+
+exports.getsingleBlog = async (req, res, next) => {
+
+    res.send(req.params)
+}
+
+exports.postBlog = async (req, res, next) => {
+    const userId = req.user._id
+    if(req.body.userEmail === req.user.email){
+        const whole_data = {...req.body, userId: userId}
+        try {
+            new Blog(whole_data).save()
+            res.status(httpStatus.CREATED);
+            return res.json({ message: "Blog Created" });
+        } catch (e){
+            next(e)
+        }
+    } else {
+        throw new APIError({
+            status: httpStatus.UNAUTHORIZED,
+            message: 'Validation error on email matching',
+        });
+    }
+}
+
+exports.editBlog = async (req, res, next) => {
+    res.send("Hello")
+}
+
+exports.deleteBlog = async (req, res, next) => {
+    res.send("Hello")
+}
