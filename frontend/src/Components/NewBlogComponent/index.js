@@ -37,7 +37,7 @@ const NewBlogComponent = () => {
     const onSubmitEvent = async (data) => {
         const {success, err} =  await api({...data, userEmail: authUser().email}, auth())
         if (err && !success) {
-            if (err.response.data.message){
+            if (err.response){
                 alert(err.response.data.message)
             }  else {
                 alert(err);
