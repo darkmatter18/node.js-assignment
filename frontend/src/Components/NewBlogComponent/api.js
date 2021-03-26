@@ -1,10 +1,14 @@
 import axios from "axios";
 import {API_ROUTE_NEW_BLOG, API_baseURL} from "../../vars";
 
-const api = async (data) => {
+const api = async (data, auth) => {
 
     try {
-        const res = await axios.post(API_baseURL + API_ROUTE_NEW_BLOG, data)
+        const res = await axios.post(API_baseURL + API_ROUTE_NEW_BLOG, data, {
+            headers: {
+                Authorization: auth 
+            }
+        })
         if(res.status === 200) {
             return  {success: res.data, err: false}
         } else {

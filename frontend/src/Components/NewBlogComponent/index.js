@@ -3,6 +3,7 @@ import React from "react"
 import AppBarComponent from "../AppBarComponent"
 import { useForm } from "react-hook-form";
 import api from "./api";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,13 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 const NewBlogComponent = () => {
     const classes = useStyles()
+    const auth = useAuthHeader()
+    const authUser = useAuthUser()
     const { register, errors, handleSubmit } = useForm({
         reValidateMode: "onBlur",
         mode: "onBlur"
     })
 
     const onSubmitEvent = async (data) => {
-        const {success, err} =  await api(data)
+        const {success, err} =  await api({...data, userEmail: authUser().email}, auth())
         console.log(success)
         console.log(err)
     }
